@@ -3,7 +3,7 @@ def create_tables_for_database(conn, cur):
 
     tables_list = [{
         'sql': """CREATE TABLE IF NOT EXISTS `admin_list` (
-          `id` int(10) UNSIGNED NOT NULL,
+          `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
           `d_id` varchar(18) NOT NULL,
           `power_lvl` varchar(18) NOT NULL,
           `last_updated` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -23,7 +23,7 @@ def create_tables_for_database(conn, cur):
     },
     {
         'sql': """CREATE TABLE IF NOT EXISTS `events` (
-          `id` int(10) UNSIGNED NOT NULL,
+          `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
           `event_casino` tinyint(1) NOT NULL DEFAULT '0',
           `event_casino_channel_id` varchar(18) DEFAULT NULL,
           `first_contact` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -32,7 +32,7 @@ def create_tables_for_database(conn, cur):
     },
     {
         'sql': """CREATE TABLE IF NOT EXISTS `logging_messages` (
-          `id` int(10) UNSIGNED NOT NULL,
+          `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
           `d_id` varchar(18) COLLATE utf8mb4_unicode_ci NOT NULL,
           `name` varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL,
           `server_id` varchar(18) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -48,7 +48,7 @@ def create_tables_for_database(conn, cur):
     },
     {
         'sql': """CREATE TABLE IF NOT EXISTS `lotto_join` (
-          `id` int(10) UNSIGNED NOT NULL,
+          `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
           `server_id` varchar(18) NOT NULL,
           `d_id` varchar(18) NOT NULL,
           `first_contact` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
@@ -56,7 +56,7 @@ def create_tables_for_database(conn, cur):
     },
     {
         'sql': """CREATE TABLE IF NOT EXISTS `member_nicknames` (
-          `id` int(10) UNSIGNED NOT NULL,
+          `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
           `server_id` varchar(18) NOT NULL,
           `d_id` varchar(18) NOT NULL,
           `name` varchar(64) NOT NULL,
@@ -66,7 +66,7 @@ def create_tables_for_database(conn, cur):
     },
     {
         'sql': """CREATE TABLE IF NOT EXISTS `member_status_online` (
-          `id` int(10) UNSIGNED NOT NULL,
+          `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
           `server_id` varchar(18) NOT NULL,
           `d_id` varchar(18) NOT NULL,
           `name` varchar(64) NOT NULL,
@@ -81,7 +81,7 @@ def create_tables_for_database(conn, cur):
     },
     {
         'sql': """CREATE TABLE IF NOT EXISTS `meme_list` (
-          `id` int(10) UNSIGNED NOT NULL,
+          `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
           `meme_id` int(11) NOT NULL,
           `adder_d_id` varchar(18) NOT NULL,
           `name` varchar(64) NOT NULL,
@@ -94,7 +94,7 @@ def create_tables_for_database(conn, cur):
     },
     {
         'sql': """CREATE TABLE IF NOT EXISTS `message_last_add_point` (
-          `id` int(10) UNSIGNED NOT NULL,
+          `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
           `sender_d_id` varchar(18) NOT NULL,
           `name` varchar(64) NOT NULL,
           `sent` varchar(20) DEFAULT NULL,
@@ -104,7 +104,7 @@ def create_tables_for_database(conn, cur):
     },
     {
         'sql': """CREATE TABLE IF NOT EXISTS `modules` (
-          `id` int(10) UNSIGNED NOT NULL,
+          `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
           `command` varchar(64) NOT NULL,
           `status` int(11) NOT NULL,
           `add_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -113,7 +113,7 @@ def create_tables_for_database(conn, cur):
     },
     {
         'sql': """CREATE TABLE IF NOT EXISTS `permissions` (
-          `id` int(10) UNSIGNED NOT NULL,
+          `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
           `admin_add_command` varchar(18) DEFAULT NULL,
           `admin_remove_command` varchar(18) DEFAULT NULL,
           `admin_meme_add` varchar(18) DEFAULT NULL,
@@ -124,7 +124,7 @@ def create_tables_for_database(conn, cur):
     },
     {
         'sql': """CREATE TABLE IF NOT EXISTS `points_and_xp` (
-          `id` int(10) UNSIGNED NOT NULL,
+          `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
           `d_id` varchar(18) NOT NULL,
           `name` varchar(64) NOT NULL,
           `points` int(11) NOT NULL DEFAULT '0',
@@ -138,7 +138,7 @@ def create_tables_for_database(conn, cur):
     },
     {
         'sql': """CREATE TABLE IF NOT EXISTS `points_daily_redeem` (
-          `id` int(10) UNSIGNED NOT NULL,
+          `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
           `d_id` varchar(18) NOT NULL,
           `name` varchar(64) NOT NULL,
           `amount` varchar(64) NOT NULL,
@@ -148,7 +148,7 @@ def create_tables_for_database(conn, cur):
     },
     {
         'sql': """CREATE TABLE IF NOT EXISTS `points_history_roulette` (
-          `id` int(10) UNSIGNED NOT NULL,
+          `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
           `d_id` varchar(18) NOT NULL,
           `name` varchar(64) NOT NULL,
           `amount` varchar(64) NOT NULL,
@@ -161,8 +161,8 @@ def create_tables_for_database(conn, cur):
     },
     {
         'sql': """CREATE TABLE IF NOT EXISTS `server_stats` (
-          `id` int(10) UNSIGNED NOT NULL,
-          `server_id` int(18) NOT NULL UNIQUE,
+          `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+          `server_id` varchar(18) NOT NULL UNIQUE,
           `restarts` int(11) NOT NULL DEFAULT '0',
           `chronogg` varchar(200) NOT NULL,
           `on_member_join` varchar(18) DEFAULT NULL,
@@ -174,7 +174,7 @@ def create_tables_for_database(conn, cur):
     },
     {
         'sql': """CREATE TABLE IF NOT EXISTS `shop_items` (
-          `id` int(10) UNSIGNED NOT NULL,
+          `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
           `item_name` varchar(128) NOT NULL,
           `item_id` int(11) NOT NULL,
           `item_price_memes_or` int(11) DEFAULT '0',
@@ -188,7 +188,7 @@ def create_tables_for_database(conn, cur):
     },
     {
         'sql': """CREATE TABLE IF NOT EXISTS `shop_items_bought_users` (
-          `id` int(10) UNSIGNED NOT NULL,
+          `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
           `d_id` int(18) NOT NULL,
           `server_d_id` int(18) NOT NULL,
           `item_id` int(11) NOT NULL,
@@ -199,7 +199,7 @@ def create_tables_for_database(conn, cur):
     },
     {
         'sql': """CREATE TABLE IF NOT EXISTS `stats_roll` (
-          `id` int(10) UNSIGNED NOT NULL,
+          `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
           `d_id` varchar(18) NOT NULL,
           `number_1` varchar(1) DEFAULT NULL,
           `number_2` varchar(2) DEFAULT NULL,
@@ -212,7 +212,7 @@ def create_tables_for_database(conn, cur):
     },
     {
         'sql': """CREATE TABLE IF NOT EXISTS `tax_pot` (
-          `id` int(10) UNSIGNED NOT NULL,
+          `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
           `server_id` varchar(18) NOT NULL,
           `d_id` varchar(18) NOT NULL,
           `number_1` int(11) NOT NULL,
