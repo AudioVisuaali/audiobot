@@ -6,7 +6,7 @@ async def user_tokens(message, client, arguments):
 
     if not arguments:
         # Getting total tokens generating message
-        info = mysqlfiles.users_get_total_tokens(message.author.id)
+        info = users_get_total_tokens(message.author.id)
         letter = ":trophy: **| You have {} tokens!**".format(info[0])
 
     else:
