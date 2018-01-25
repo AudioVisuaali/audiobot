@@ -30,8 +30,36 @@ Here are no join queries, I don't have any idea why I didn't use join
 7. EVENTS
 
 ######################################
-1. ADDING POINTS FOR USER /POINT SYSTEM
+1. POINTS FOR USER /POINT SYSTEM
 '''
+
+def users_get_roll_stats(d_id):
+    # Points here are tokens ;)
+    cur.execute("""
+            SELECT
+                COUNT(CASE
+                    WHEN `d_id` LIKE %s THEN 1 END)
+                    AS `rows`,
+                COUNT(CASE
+                    WHEN `d_id` LIKE %s AND
+                    `is_double` LIKE 1 THEN 1 END)
+                    AS `doubles`,
+                (SELECT
+                    SUM(`victory_amount_memes`)
+                    FROM `stats_roll`
+                    WHERE `d_id`
+                    LIKE %s)
+                    AS `memes`,
+                (SELECT
+                    SUM(`victory_amount_points`)
+                    FROM `stats_roll`
+                    WHERE `d_id`
+                    LIKE %s)
+                    AS `tokens`
+            FROM `stats_roll`;""", (d_id, d_id, d_id, d_id))
+
+    sqlresult = cur.fetchone()
+    return sqlresult
 
 # Getting last messages
 def message_last_interval_seconds(d_id):
