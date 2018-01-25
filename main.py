@@ -17,6 +17,9 @@ from audiovisuaali import how_many_seconds_until_midnight
 import modules
 import dirmap
 
+# Client
+client = DClient()
+
 # Connecting to database
 send(1, "Trying to connect to database")
 import mysqlfiles
@@ -330,9 +333,6 @@ async def tax_pot_def():
 
         #Sleeping for 1 minute
         await asleep(60)
-
-# Client
-client = DClient()
 
 #client.loop.create_task(add_users_xp()) # Bad way to record stats :/ (But it works :D)
 #client.loop.create_task(add_users_points()) # Also bad way to record stats :/ (But it works :D)
