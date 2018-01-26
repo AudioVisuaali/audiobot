@@ -30,7 +30,7 @@ Here are no join queries, I don't have any idea why I didn't use join
 7. EVENTS
 
 ######################################
-1. POINTS FOR USER /POINT SYSTEM
+1. ADDING POINTS FOR USER /POINT SYSTEM
 '''
 
 def users_get_roll_stats(d_id):
@@ -60,6 +60,7 @@ def users_get_roll_stats(d_id):
 
     sqlresult = cur.fetchone()
     return sqlresult
+
 
 # Getting last messages
 def message_last_interval_seconds(d_id):
@@ -219,7 +220,7 @@ def on_member_join_room_id():
 def on_member_remove_room_id():
     cur.execute("SELECT on_member_remove FROM server_stats;")
     sqlresult = cur.fetchone()
-    return strsqlresult
+    return sqlresult
 
 # server pot
 def server_stats_tax_pot_get():
