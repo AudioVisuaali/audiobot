@@ -1,20 +1,50 @@
+from mysqlfiles import users_daily_redeem_by_day
+from mysqlfiles import users_daily_redeem_by_day_add
+from mysqlfiles import users_set_points_to_plus
 from mysqlfiles import users_get_daily_points
-from mysqlfiles import users_get_daily_redeems
-from mysqlfiles import points_daily_redeem
-from mysqlfiles import points_users_memes_add_on_message
-
-from config import DAILY_AMOUNT_MIN
-from config import DAILY_AMOUNT_MAX
-from config import DAILY_WAIT_TIME
-
+from mysqlfiles import points_stats_insert
+from config import DAILY_AMOUNT_MIN as daily_min
+from config import DAILY_AMOUNT_MAX as daily_max
+from audiovisuaali import day_splitted_by_time
+from audiovisuaali import author_nickanme
+from audiovisuaali import time_format_new
 from datetime import datetime
-from datetime import timedelta
-
-from audiovisuaali import send
 from random import randint
 
 # This is daily or #KELA
-async def daily(message, client, arguemnts):
+async def daily(message, client, arguments):
+
+        # deciding what day since epoch
+        day = day_splitted_by_time(46800)
+
+        # Checking for redeems for specific day
+        redeems = users_daily_redeem_by_day(message.author.id, day)
+
+        # Getting user points
+        user_points = users_get_daily_points(message.author.id)[0]
+
+        # Random
+        amount = randint(daily_min, daily_max)
+
+        # name
+        name = author_nickanme(message.author)
+
+        # Message
+        if not redeems:
+            await client.send_message(message.channel, ":moneybag: **| You redeemed your daily points worth of {} memes! You now have {} memes!**".format(amount, user_points+amount))
+            points_stats_insert(message.server.id, message.author.id, 2, "Daily", "", "", "+"+str(amount), "", "", "", "", "", 0, amount, 0)
+            try:
+                users_daily_redeem_by_day_add(message.author.id, name, day, amount)
+            except:
+                users_daily_redeem_by_day_add(message.author.id, "dailyLUL", day, amount)
+            users_set_points_to_plus(amount, message.author.id)
+        else:
+            await client.send_message(message.channel, ":moneybag: **| Check again when the clock is `15:00`**")
+
+
+
+# This is daily or #KELA
+async def daily_old(message, client, arguemnts):
 
     dmin = DAILY_AMOUNT_MIN
     dmax = DAILY_AMOUNT_MAX

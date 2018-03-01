@@ -1,19 +1,12 @@
-import audiovisuaali
-import config
-from mysqlfiles import profile_id_get
-import discord
-
+from audiovisuaali import send
+from config import OWNER_ID as owners
+from discord import Game
 # bot status playing
 async def set_bot_playing(message, client, arguments):
 
-    # User power level
-    power = profile_id_get(message.author.id)
-
-    # Setting playing if power level
-    if not int(power[1]) >= 3:
-        await client.send_message(message.channel, "**You don't have right to set bot status!**")
-
+    if message.author.id not in owners:
+        return
     else:
-        await client.change_presence(game=discord.Game(name=arguments))
-
+        await client.change_presence(game=Game(name=arguments))
+        send(1, "Updating playing status!")
     return

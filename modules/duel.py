@@ -3,8 +3,10 @@ from audiovisuaali import get_user_instance
 from mysqlfiles import users_get_daily_points
 from mysqlfiles import users_set_points_to_plus
 from mysqlfiles import users_set_points_to_minus
+from mysqlfiles import points_stats_insert
 from asyncio import sleep as asleep
 from random import randint
+
 
 # Duel for 2 users
 async def duel(message, client, arguments):
@@ -32,9 +34,9 @@ async def duel(message, client, arguments):
         return
 
     # Checking if dueling self
-    if owner.id == slave.id:
-        await client.send_message(message.channel, "**:crossed_swords: | {}, you can't duel yourself!**".format(owner_name))
-        return
+    #if owner.id == slave.id:
+    #    await client.send_message(message.channel, "**:crossed_swords: | {}, you can't duel yourself!**".format(owner_name))
+    #    return
 
     # Checking if duleing bots
     if slave.bot:
@@ -92,27 +94,33 @@ async def duel(message, client, arguments):
 
         # Sending message for rolling and deleting a message for clearness
         await client.delete_message(message_send)
-        msg = await client.send_message(message.channel, "<:monkaS:332305847114006539> **Rolling**")
+        msg = await client.send_message(message.channel, "<:reeee:312321001398730762> **Rolling**")
         await asleep(1.5)
         letter = ""
 
         #player 1 wins
         if randint(0, 99) < 50:
             # Message content
+            print(arguments[1])
             letter = "**:crossed_swords: | {} won {} memes!**"''.format(owner_name, str(int(arguments[1])*2))
+            points_stats_insert(message.server.id, message.author.id, 3, "Duel", arguments[1], "", "+"+arguments[1], "", slave_name, "", "", "", 0, int(arguments[1]), 0)
+            points_stats_insert(message.server.id, slave.id, 3, "Duel", arguments[1], "", "-"+arguments[1], "", owner_name, "", "", "", 0, 0, int(arguments[1]))
             # Adding/removing points
             users_set_points_to_plus(arguments[1], message.author.id)
             users_set_points_to_minus(arguments[1], slave.id)
-            print(arguments[1][2:-1])
+
 
         # Player 2 wins
         else:
             # Message content
+            print(arguments[1])
             letter = "**:crossed_swords: | {} won {} memes!**"''.format(slave_name, str(int(arguments[1])*2))
+            points_stats_insert(message.server.id, message.author.id, 3, "Duel", arguments[1], "", "-"+arguments[1], "", slave_name, "", "", "", 0, 0, int(arguments[1]))
+            points_stats_insert(message.server.id, slave.id, 3, "Duel", arguments[1], "", "+"+arguments[1], "", owner_name, "", "", "", 0, int(arguments[1]), 0)
             # Adding/removing points
             users_set_points_to_plus(arguments[1], arguments[1][2:-1])
             users_set_points_to_minus(arguments[1], message.author.id)
-            print(arguments[1][2:-1])
+
 
         # Posting the result in chat
         await client.edit_message(msg, letter)

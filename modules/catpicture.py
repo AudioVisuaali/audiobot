@@ -4,7 +4,7 @@ from urllib.request import urlretrieve
 from urllib.request import urlopen
 from requests import get as rget
 from json import loads
-
+from os import remove as osremove
 # Randomcat (Get's a random cat)
 async def random_cat(message, client, arguments):
 
@@ -15,5 +15,6 @@ async def random_cat(message, client, arguments):
 
     # Sending message
     await client.send_file(message.channel, "./download/cats/"+response[20:],filename="./download/cats/"+response[20:], content="<@"+message.author.id+"> ", tts=False)
+    osremove("./download/cats/"+response[20:])
     send(1, "Wild cat received!")
     return

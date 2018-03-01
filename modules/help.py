@@ -1,8 +1,7 @@
 from config import HELP_EXTERNAL_COMMANDS as help_external_commands
 from config import COMMAND_START as command_start
-from config import OWNER_ID as owner_id
+from config import OWNER_ID as owners
 from mysqlfiles import commands_get_all
-from mysqlfiles import profile_id_get
 from audiovisuaali import send
 from dirmap import dirmap
 
@@ -29,7 +28,7 @@ async def commands_help(message, client, arguments):
                 keepo += "`" + ", ".join(pod["command_start"] + b for b in pod["commands_list"]) + "`"
 
         try:
-            if message.author.id in owner_id or (profile_id_get(message.author.id)[1] == "3"):
+            if message.author.id in owners:
                 keepo += "\n\n**Here are all the __ADMIN__ commands!!!** :smirk:\n"
                 func_comd_list = []
                 for a in function_commands:

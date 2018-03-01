@@ -1,12 +1,5 @@
-#import audiovisuaali
-from config import OWNER_ID as owners
-
 # Roles
 async def roles(message, client, arguments):
-
-    # Checking if the user has enough powers to run the command
-    if message.author.id not in owners:
-        return
 
     # Values
     roles_list = ""

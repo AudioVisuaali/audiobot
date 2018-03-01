@@ -1,15 +1,12 @@
 from audiovisuaali import send
 from audiovisuaali import get_user_instance
-from mysqlfiles import profile_id_get
+from config import OWNER_ID as owners
 
 # time Get's current time
 async def joined(message, client, arguments):
 
     # Checking if the user has enough powers to run the command
-    check = profile_id_get(message.author.id)
-
-    if not check[0] ==  message.author.id:
-        await client.send_message(message.channel, ":x: | You don't have enough rights to run the command!")
+    if message.author.id not in owners:
         return
 
     # self or other

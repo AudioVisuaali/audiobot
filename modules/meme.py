@@ -1,10 +1,9 @@
 from audiovisuaali import send
 from mysqlfiles import meme_get_random
-from mysqlfiles import profile_id_get
 from mysqlfiles import meme_get_total_memes
 from mysqlfiles import meme_insert_new
 from mysqlfiles import meme_get_meme_by_id
-
+from config import OWNER_ID as owners
 
 # Meme database
 async def meme(message, client, arguments):
@@ -28,10 +27,9 @@ async def meme(message, client, arguments):
     elif arguments[0] == "add":
 
         # Checking if the user has enough powers to run the command
-        check = profile_id_get(message.author.id)
-        if not check[0] ==  message.author.id:
-            await client.send_message(message.channel, ":x: | You don't have enough rights to run the command!")
+        if message.author.id not in owners:
             return
+
 
         total_memes = meme_get_total_memes()
         if total_memes == None:

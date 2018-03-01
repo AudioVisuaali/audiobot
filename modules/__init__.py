@@ -62,3 +62,14 @@ from modules.dad import dad_joke
 from modules.chucknorris import chuck_norris
 from modules.pot import tax_pot
 from modules.join import raffle_lotto
+from modules.slotmachine import slot_machine
+from modules.tuplat import tuplat
+from modules.purge import purge
+from modules.setavatar import set_avatar
+from modules.black_jack import black_jack
+from modules.fishing import fishing
+from modules.ao_ruoka import ao_ruoka
+from modules.chronogg import chronogg
+from modules.server_stats import server_stats
+from modules.bank import bank
+from modules.userinfo import userinfo

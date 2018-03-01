@@ -5,24 +5,12 @@ from audiovisuaali import send as asend
 async def command_retrieve(message, client, arguments):
 
     # Searching for response
-    send = m_command_retrieve(arguments)
+    send = m_command_retrieve(arguments, message.server.id)
 
+    # Checking if anything to send
     if send is None:
-        asend(1, "Command not found anywhere!")
         return
 
-    if asend is None:
-        asend(1, "Command not found")
-        return
-
-    else:
-
-        # Sending message
-        await client.send_message(message.channel, "<@{}> ".format(message.author.id, send[0]))
-        send(1, "Command sent!")
-        return
-
-
-    #TODO: logging
-    #TODO: add error here
+    # Sending message
+    await client.send_message(message.channel, send[0].format("<@{}>".format(message.author.id)))
     return

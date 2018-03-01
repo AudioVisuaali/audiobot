@@ -1,6 +1,7 @@
-import audiovisuaali
-import mysqlfiles
-import config
+#import audiovisuaali
+from mysqlfiles import events_get_state_casino
+from mysqlfiles import events_change_state_casino
+from config import OWNER_ID as owners
 # TODO NOT DONE :DDDD and importing too much extra
 # This is still under contstuction
 # This allows casino to be toggled on off later on
@@ -9,9 +10,7 @@ import config
 async def casino(message, client, argumets):
 
     # Checking if the user has enough powers to run the command
-    check = mysqlfiles.profile_id_get(message.author.id)
-    if not check[0] ==  message.author.id:
-        await client.send_message(message.channel, ":x: | You don't have enough rights to run the command!")
+    if message.author.id not in owners:
         return
 
     info = mysqlfiles.events_get_state_casino()

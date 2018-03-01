@@ -2,7 +2,7 @@ from urllib.request import urlretrieve
 from urllib.request import urlopen
 from urllib.request import quote
 from audiovisuaali import send
-
+from os import remove as osremove
 
 # random_dog (Get's a random dog)
 async def random_dog(message, client, arguments):
@@ -18,5 +18,6 @@ async def random_dog(message, client, arguments):
 
     # Sending picture
     await client.send_file(message.channel, "./download/dogs/"+response,filename="./download/dogs/"+response, content="<@"+message.author.id+"> ", tts=False)
+    osremove("./download/dogs/"+response)
     send(1, "Top Dog received!")
     return

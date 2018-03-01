@@ -71,9 +71,9 @@ def generate_menu(message, client, arguments, vision=None, extra=None):
 
 
 async def shop(message, client, arguments):
-    if message.channel.id in ["404356322595962880","404356266886955009"]:
-        return
-    if message.channel.id != "399163360404307969":
+    #if message.channel.id in ["404356322595962880","404356266886955009"]:
+    #    return
+    if message.channel.id != "404356266886955009":
 
         letter = "You can use shop only in #Golden Frog Casino >>> #shop When it's open"
         await client.send_message(message.channel, letter)

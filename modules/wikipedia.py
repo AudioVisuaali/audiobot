@@ -22,9 +22,17 @@ async def wikipedia(message, client, arguments):
     try:
         # Fetch
         response = loads(rget(query).text)
-        wikilink = "https://en.wikipedia.org/wiki/" + quote(response["query"]["search"][0]["title"])
-        letter = ":bookmark: **| {}, here's your link for: **__{}__\n<{}>".format(name, arguments, wikilink)
-
+        print(response["query"]["search"][0])
+        wikilink = "<https://en.wikipedia.org/wiki/{}>".format(quote(response["query"]["search"][0]["title"]))
+        letter = ":bookmark: **| {}, here's your link for: **__{}__\n\n:one: {}\n".format(name, arguments, wikilink)
+        try:
+            letter += "\n:two: <https://en.wikipedia.org/wiki/{}>\n".format(quote(response["query"]["search"][1]["title"]))
+            try:
+                letter += "\n:three: <https://en.wikipedia.org/wiki/{}>\n".format(quote(response["query"]["search"][2]["title"]))
+            except:
+                pass
+        except:
+            pass
     # Check
     except IndexError:
         letter = ":bookmark: **| {}, we couldn't find a match!**".format(name)

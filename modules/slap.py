@@ -1,5 +1,6 @@
 from audiovisuaali import get_user_instance
 from audiovisuaali import send
+from audiovisuaali import author_nickanme
 
 # Slap
 async def slap(message, client, arguments):
@@ -10,16 +11,10 @@ async def slap(message, client, arguments):
         return
 
     # Creating author name
-    if message.author.nick is None:
-        author_name = message.author.name
-    else:
-        author_name = message.author.nick
+    author_name = author_nickanme(message.author)
 
     # Creating clients name
-    if user.nick is None:
-        client_name = user.name
-    else:
-        client_name = user.nick
+    client_name = author_nickanme(user)
 
     # Sending message
     letter = "**:raised_back_of_hand: | {} sla:b:s {}!**".format(author_name, client_name)

@@ -8,13 +8,15 @@ async def avatar(message, client, arguments):
 
         # Checks if message author or else
         if not arguments:
-            user_instance = message.author.avatar_url
+            user_instance = message.author
         else:
             user_instance = await get_user_instance(message, arguments[0])
 
         # Stripping link
+        print(user_instance.name)
         url = user_instance.avatar_url
         file_name = url.split("/")[len(url.split("/"))-1].split("?")[0]
+        print(client.avatar_url)
 
         # User name depending on given user
         if user_instance.nick is None:

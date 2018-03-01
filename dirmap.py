@@ -36,8 +36,8 @@ dirmapexample = {
         }]
     },
 }
-
 # ADD YOUR FUNCTION PATHS HERE +\/
+
 # ADD YOUR COMMAND TO IT'S OWN FILE.py
 # IMPORT YOUR FILE.py IN /modules/__init__.py
 
@@ -59,6 +59,23 @@ dirmap = {
         }]
     },
 
+
+    "purge": {
+        "function": "purge",
+        "admin": True,
+        "args": {
+            "delimeter": " ",
+            "split": 1,
+            "length": [0],
+        },
+        "info": "This command is used to clear bots cache",
+        "syntax": "purge",
+        "example": [{
+            "input": "purge",
+            "output": ':white_check_mark: **| Bot is now ready start over!**'
+        }]
+    },
+
     "remove": {
         "function": "command_remove",
         "admin": True,
@@ -72,6 +89,38 @@ dirmap = {
         "example": [{
             "input": "remove whitehouse",
             "output": ":white_check_mark: **| Command not in database!"
+        }]
+    },
+
+    "setavatar": {
+        "function": "set_avatar",
+        "admin": True,
+        "args": {
+            "delimeter": " ",
+            "split": 2,
+            "length": [0,1],
+        },
+        "info": "This command changes bots profile image!",
+        "syntax": "setavatar <link>",
+        "example": [{
+            "input": "setavatar <link>",
+            "output": ":white_check_mark: **| Profile picture has been updated!"
+        }]
+    },
+
+    "userinfo": {
+        "function": "userinfo",
+        "admin": True,
+        "args": {
+            "delimeter": " ",
+            "split": 2,
+            "length": [0,1],
+        },
+        "info": "Gets users info!",
+        "syntax": "userinfo",
+        "example": [{
+            "input": "userinfo",
+            "output": ":white_check_mark: **| Profile picture has been updated!"
         }]
     },
 
@@ -155,6 +204,22 @@ dirmap = {
         }]
     },
 
+    "join": {
+        "function": "raffle_lotto",
+        "admin": False,
+        "args": {
+            "delimeter": " ",
+            "split": 20,
+            "length": [0,1],
+        },
+        "info": "This command removes added commands!",
+        "syntax": "remove [command]",
+        "example": [{
+            "input": "remove whitehouse",
+            "output": ":white_check_mark: **| Command not in database!"
+        }]
+    },
+
     "ping": {
         "function": "ping",
         "admin": False,
@@ -168,6 +233,22 @@ dirmap = {
         "example": [{
             "input": "ping",
             "output": "pong!"
+        }]
+    },
+
+    "chronogg": {
+        "function": "chronogg",
+        "admin": False,
+        "args": {
+            "delimeter": None,
+            "split": 0,
+            "length": [0],
+        },
+        "info": "Get's you the daily game from chronoGG",
+        "syntax": "chronogg",
+        "example": [{
+            "input": "chronogg",
+            "output": "<chronogg response>"
         }]
     },
 
@@ -601,6 +682,26 @@ dirmap = {
         }]
     },
 
+    "bank": {
+        "function": "bank",
+        "admin": False,
+        "args": {
+            "delimeter": " ",
+            "split": 2,
+            "length": [0,2],
+        },
+        "info": "Bank management",
+        "syntax": "bank ?<(add|deposit|put|give)|(take|withdraw|remove)> ?<amount>",
+        "example": [{
+            "input": "bank",
+            "output": "You have 55 memes in bank!"
+        },
+        {
+            "input": "bank add 55",
+            "output": "You have added 55 memes to bank!"
+        }]
+    },
+
     "memes": {
         "function": "points",
         "admin": False,
@@ -715,7 +816,7 @@ dirmap = {
         "args": {
             "delimeter": " ",
             "split": 2,
-            "length": [0,1],
+            "length": [0,1,2,3,4],
         },
         "info": "Scoreboard",
         "syntax": "top ?<tokens/xp/memes/points>",
@@ -901,15 +1002,27 @@ dirmap = {
         "function": "gamble",
         "admin": False,
         "args": {
-            "delimeter": None,
-            "split": 0,
-            "length": [0],
+            "delimeter": " ",
+            "split": 5,
+            "length": [0,1,2],
         },
         "info": "See your gamble history(aka how much you have lost)",
         "syntax": "gamble",
         "example": [{
             "input": "gamble",
             "output": "A list of past gambles"
+        },
+        {
+            "input": "gamble username",
+            "output": "A list of past gambles of username"
+        },
+        {
+            "input": "gamble 40",
+            "output": "A list of past gambles with 40 results"
+        },
+        {
+            "input": "gamble username 40",
+            "output": "A list of past gambles of username with 40 results"
         }]
     },
 
@@ -1100,6 +1213,22 @@ dirmap = {
             "input": "online",
             "output": ":clock10: **| bot has been online for 21 minutes and has been restarted 1337 times**"
         }]
+    },
+
+    "server": {
+        "function": "server_stats",
+        "admin": True,
+        "args": {
+            "delimeter": None,
+            "split": 2,
+            "length": [0],
+        },
+        "info": "Shows information about the server!",
+        "syntax": "server",
+        "example": [{
+            "input": "server",
+            "output": "asdasdads **| adsadsasdadsasd**"
+        }]
 
     },
 
@@ -1134,14 +1263,43 @@ dirmap = {
         "args": {
             "delimeter": " ",
             "split": 2,
-            "length": [0,2],
+            "length": [0,1,2],
         },
         "info": "Get a random meme",
         "syntax": "roll",
         "example": [{
             "input": "roll",
             "output": "29"
+        },
+        {
+            "input": "roll 999",
+            "output": "373"
+        },
+        {
+            "input": "roll 1000 10000",
+            "output": "6311"
         }]
+    },
+
+    "tuplat": {
+        "function": "tuplat",
+        "admin": False,
+        "args": {
+            "delimeter": " ",
+            "split": 2,
+            "length": [0,1],
+        },
+        "info": "Shows your roll stats",
+        "syntax": "tuplat",
+        "example": [{
+            "input": "tuplat",
+            "output": ":game_die:  **| <stats>**"
+        },
+        {
+            "input": "tuplat [name]",
+            "output": ":game_die:  **| <stats>**"
+        }]
+
     },
 
     "roulette": {
@@ -1158,6 +1316,48 @@ dirmap = {
             "input": "roulette 69",
             "output": "** :slot_machine:  | You have lost 69 memes, you now have 1337 memes! <:feelsrageman:318490463323553795>**"
         }]
+    },
+
+    "fish": {
+        "function": "fishing",
+        "admin": False,
+        "args": {
+            "delimeter": " ",
+            "split": 2,
+            "length": [0,1],
+        },
+        "info": "Go fishing and try out your luck!",
+        "syntax": "fish <amount>",
+        "example": [{
+            "input": "fish 20",
+            "output": "** ZZZZ**"
+        }]
+    },
+
+    "bj": {
+        "function": "black_jack",
+        "admin": False,
+        "args": {
+            "delimeter": " ",
+            "split": 2,
+            "length": [1],
+        },
+        "info": "Play blackjack!",
+        "syntax": "blackjack <amount>",
+        "example": [{
+            "input": "blackjack 69",
+            "output": "**<Opens blackjack menu>**"
+        }]
+    },
+
+    "slots": {
+        "function": "slot_machine",
+        "admin": False,
+        "args": {
+            "delimeter": " ",
+            "split": 2,
+            "length": [0,1],
+        },
     },
 
     "shop": {
@@ -1273,6 +1473,26 @@ dirmap = {
         {
             "input": "help roulette",
             "output": "Shows roulette commands info"
+        }]
+    },
+
+    "ao": {
+        "function": "ao_ruoka",
+        "admin": False,
+        "args": {
+            "delimeter": " ",
+            "split": 2,
+            "length": [0,1],
+        },
+        "info": "Shows the food in jao services!",
+        "syntax": "ao ?<week>",
+        "example": [{
+            "input": "ao",
+            "output": "Shows the food of the day!"
+        },
+        {
+            "input": "ao week",
+            "output": "Shows the food of the week!"
         }]
     },
 

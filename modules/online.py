@@ -1,15 +1,18 @@
-from audiovisuaali import bot_start_up_time
-from datetime import datetime
-from math import floor as mfloor
+from audiovisuaali import global_cd_list_per_command
 from mysqlfiles import server_stats_restarts
+from math import floor as mfloor
+from datetime import datetime
 
 # how long the server has been online
 async def online(message, client, arguments):
 
+
+    cooldown_lists_time = global_cd_list_per_command()
+    asd = cooldown_lists_time.bot_start_up_time
     # Calc time
     time_now = datetime.now()
-    asd = bot_start_up_time()
-    time_in_seconds = mfloor((time_now - asd.bot_start_up_time).total_seconds())
+    #asd = bot_start_up_time()
+    time_in_seconds = mfloor((time_now - asd).total_seconds())
 
     #time
     if time_in_seconds < 60:
